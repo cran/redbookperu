@@ -1,4 +1,4 @@
-540aa12a030be167799f8b3f0738b3c3 *DESCRIPTION
+f59bb630479bfb49fdb917ef04749ab1 *DESCRIPTION
 c1ecd78a509972375811a019dffa3948 *LICENSE
 ba262570daf48e85bd5994e50c92dcc3 *NAMESPACE
 106438dc4b492db1862b9a10ce1d81b9 *R/check_redbook.R
@@ -9,9 +9,9 @@ b352d4500afaad56a289c1b6ea4c1b4b *R/redbookperu_data.R
 c7a1831fbb09f0fb9a8b117af06e81d2 *R/redbookperu_names.R
 bc9667f90635d304aa6f6b3fd1525dbd *R/reg_peru.R
 13dfa720f021f6fa4ec98330c2b2460c *R/sysdata.rda
-3e05bfa71b7cf77407397a0cf5f7b25d *README.md
+eb853701e36c0a7bc330bcc391ab2429 *README.md
 31221e6c16cda10c2945ee932cd8d5ff *data/redbook_tab.rda
-9b1458edd9d5d6e750644cb66c468d99 *data/redbook_taxonomy.rda
+a78b38cb6546e34e53067805261c4705 *data/redbook_taxonomy.rda
 b2186483696bf047b260204fda897b09 *data/reg_peru.rda
 b43bb4d3c8d2daca99b66a3da4130d3c *inst/CITATION
 48f9e38322dc4846c671c8198e143b43 *man/check_redbook.Rd
@@ -21,5 +21,5 @@ b43bb4d3c8d2daca99b66a3da4130d3c *inst/CITATION
 e692d6df64d9a0ef4fce9e90c3740af9 *man/redbook_taxonomy.Rd
 4c44efa73d6b0cdca8ba827c145802ca *man/reg_peru.Rd
 bbe6116032179a5e18ede58e84209122 *tests/testthat.R
-ed31b433e1abcb3bc59487ccdc050222 *tests/testthat/test_check_redbook.R
-fe7e351cd760d9d25268958f1c1bb5e8 *tests/testthat/test_data_check.R
+26a83c0a9f26f0899fc60ea0f6035c30 *tests/testthat/test_check_redbook.R
+16f7dc575d968c2201066e32c86df7aa *tests/testthat/test_data_check.R

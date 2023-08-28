@@ -12,13 +12,15 @@ status](https://www.r-pkg.org/badges/version/redbookperu)](https://CRAN.R-projec
 [![Codecov test
 coverage](https://codecov.io/gh/PaulESantos/redbookperu/branch/main/graph/badge.svg)](https://app.codecov.io/gh/PaulESantos/redbookperu?branch=main)
 [![R-CMD-check](https://github.com/PaulESantos/redbookperu/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/redbookperu/actions/workflows/R-CMD-check.yaml)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/redbookperu?color=green)](https://cran.r-project.org/package=redbookperu)
+[![](http://cranlogs.r-pkg.org/badges/last-week/redbookperu?color=green)](https://cran.r-project.org/package=redbookperu)
 <!-- badges: end -->
 
 The R package `redbookperu` provides convenient access to the
 information contained in the [Red Book of Endemic Plants of
 Peru](https://revistasinvestigacion.unmsm.edu.pe/index.php/rpb/issue/view/153).
 This book represents a comprehensive compilation of data on Peru’s
-endemic plant species, encompassing records of 5,508 distinct taxa.
+endemic plant species, encompassing records of 5,507 distinct taxa.
 Although this document marked a milestone by consolidating an ambitious
 initiative focused on understanding the diversity of Peru’s endemic
 plant species at the time of its publication, it currently requires a
@@ -42,6 +44,16 @@ information that we provide.
 
 ### Installation
 
+You can install the `redbookperu` package from CRAN using:
+
+``` r
+install.packages("redbookperu")
+
+# or
+
+pak::pak("redbookperu")
+```
+
 You can install the development version of `redbookperu` from GitHub:
 
 ``` r
@@ -55,7 +67,7 @@ session using:
 
 ``` r
 library(redbookperu)
-#> This is redbookperu 0.0.0.2
+#> This is redbookperu 0.0.2
 ```
 
 To determine if a species of interest is listed in the Red Book of
@@ -83,10 +95,10 @@ splist <- c("Aphelandra cuscoenses", "Sanchezia capitata",
             "Sanchezia ovata", "Piper stevensi",
             "Verbesina andinaa", "Verbesina andina", "Weinmania nubigena")
 
-check_redbook(splist, tax_status = TRUE)
+redbookperu::check_redbook(splist, tax_status = TRUE)
 #> [1] "Aphelandra cuscoensis - Accepted name - Fuzzy match"
 #> [2] "Sanchezia ovata - Updated name"                     
-#> [3] "Sanchezia ovata - Accepted name"                    
+#> [3] "Sanchezia ovata - Not endemic"                      
 #> [4] "Piper stevensii - No opinion - Fuzzy match"         
 #> [5] "Verbesina andina - No info. available - Fuzzy match"
 #> [6] "Verbesina andina - No info. available"              
@@ -98,8 +110,8 @@ check_redbook(splist, tax_status = TRUE)
   species present in the database.
 
 ``` r
-check_redbook(splist, tax_status = FALSE)
-#> [1] "Endemic - fuzzy match" "Endemic"               "Endemic"              
+redbookperu::check_redbook(splist, tax_status = FALSE)
+#> [1] "Endemic - fuzzy match" "Endemic"               "Not endemic"          
 #> [4] "Endemic - fuzzy match" "Endemic - fuzzy match" "Endemic"              
 #> [7] "Not endemic"
 ```
@@ -113,21 +125,18 @@ allowing users to easily analyze species data within a tabular format.
 
 ``` r
 tibble::tibble(splist = splist) |> 
-  dplyr::mutate(endemic_tax_status = check_redbook(splist, tax_status = TRUE),
-                endemic = check_redbook(splist, tax_status = FALSE))
-```
-
-``` r
-# A tibble: 7 × 3
-  splist                endemic_tax_status                                  endemic              
-  <chr>                 <chr>                                               <chr>                
-1 Aphelandra cuscoenses Aphelandra cuscoensis - Accepted name - Fuzzy match Endemic - fuzzy match
-2 Sanchezia capitata    Sanchezia ovata - Updated name                      Endemic              
-3 Sanchezia ovata       Sanchezia ovata - Accepted name                     Endemic              
-4 Piper stevensi        Piper stevensii - No opinion - Fuzzy match          Endemic - fuzzy match
-5 Verbesina andinaa     Verbesina andina - No info. available - Fuzzy match Endemic - fuzzy match
-6 Verbesina andina      Verbesina andina - No info. available               Endemic              
-7 Weinmania nubigena    Weinmania nubigena - Not endemic                    Not endemic   
+  dplyr::mutate(endemic_tax_status = redbookperu::check_redbook(splist, tax_status = FALSE),
+                endemic = redbookperu::check_redbook(splist, tax_status = TRUE))
+#> # A tibble: 7 × 3
+#>   splist                endemic_tax_status    endemic                           
+#>   <chr>                 <chr>                 <chr>                             
+#> 1 Aphelandra cuscoenses Endemic - fuzzy match Aphelandra cuscoensis - Accepted …
+#> 2 Sanchezia capitata    Endemic               Sanchezia ovata - Updated name    
+#> 3 Sanchezia ovata       Not endemic           Sanchezia ovata - Not endemic     
+#> 4 Piper stevensi        Endemic - fuzzy match Piper stevensii - No opinion - Fu…
+#> 5 Verbesina andinaa     Endemic - fuzzy match Verbesina andina - No info. avail…
+#> 6 Verbesina andina      Endemic               Verbesina andina - No info. avail…
+#> 7 Weinmania nubigena    Not endemic           Weinmania nubigena - Not endemic
 ```
 
 If you intend to access the information provided for each of the species
@@ -138,7 +147,7 @@ conservation status, distribution, and descriptions presented in the
 original publication.
 
 ``` r
-get_redbook_data(c("Sanchecia capitata",
+redbookperu::get_redbook_data(c("Sanchecia capitata",
                    "Weinmania nubigena",
                    "Macroclinium christensonii",
                    "Weberbauera violacea"))
